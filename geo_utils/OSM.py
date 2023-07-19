@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 import osmnx as ox
 import pandas as pd
 
+
 @dataclass
 class OSM_geometry:
     """
@@ -15,7 +16,7 @@ class OSM_geometry:
     center_point: int
     tags: dict
     radio: int = field(default=1000)
-    
+
     def get_features_from_point(self):
         features = ox.features.features_from_point(
             self.center_point,
@@ -23,17 +24,27 @@ class OSM_geometry:
             tags=self.tags
         )
         return features
-    
+
     def get_graph_from_point(self):
         graph = ox.graph.graph_from_point(
             self.center_point,
             dist=self.radio
         )
         return graph
-    
+
     def get_basic_stats(self):
-        return ox.stats.basic_stats(self.graph)
-    
+        return pd.DataFrame(
+            ox.stats.basic_stats(self.graph)
+            .drop(
+                columns=[
+                    "streets_per_node_proportions",
+                    "streets_per_node_counts"
+                    ]
+            )  # we dont wanna use this columns at the moment
+            .drop_duplicates()
+            # delete repeated rows due to the columns droped above
+            )
+
     def __post_init__(self):
         self.graph = self.get_graph_from_point()
         self.features = self.get_features_from_point()
@@ -55,5 +66,3 @@ class OSM_geometry:
                 .pipe(rename_columns)
             )
         return pd.concat(dfs, axis=1)
-
-
