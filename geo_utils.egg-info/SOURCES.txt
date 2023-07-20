@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+geo_utils/OSM.py
+geo_utils/__init__.py
+geo_utils/census.py
+geo_utils.egg-info/PKG-INFO
+geo_utils.egg-info/SOURCES.txt
+geo_utils.egg-info/dependency_links.txt
+geo_utils.egg-info/requires.txt
+geo_utils.egg-info/top_level.txt
+geo_utils/data/ISMT_2022_actualizado_simplificado.feather
+geo_utils/data/info_manzanas_censo2017.feather

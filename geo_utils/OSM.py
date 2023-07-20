@@ -2,11 +2,11 @@ from dataclasses import dataclass, field
 import osmnx as ox
 import pandas as pd
 
-
 @dataclass
 class OSM_geometry:
     """
-        Point of interest in lat, long format that retrieves Open Street Maps's features
+        Point of interest in lat, long format that retrieves Open 
+        Street Maps's features
 
         Args:
             lat: center point latitude.

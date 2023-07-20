@@ -1,17 +1,23 @@
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
+import wget
+import os
 
 # TODO:
 # 1: CHECK IF 18S OR 19S SHOULD APPLY
 
 
 def get_census_dataset() -> gpd.GeoDataFrame:
-    return gpd.read_feather("data/info_manzanas_censo2017.feather")
+    os.makedirs("data", exist_ok=True)
+    file = wget.download("https://github.com/martin-conur/geo_utils/blob/main/geo_utils/data/info_manzanas_censo2017.feather?raw=True", out="data/info_manzanas_censo2017.feather")
+    return gpd.read_feather(file)
 
 
 def get_ismt_dataset() -> gpd.GeoDataFrame:
-    return gpd.read_feather("data/ISMT_2022_actualizado_simplificado.feather")
+    os.makedirs("data", exist_ok=True)
+    file = wget.download("https://github.com/martin-conur/geo_utils/blob/main/geo_utils/data/ISMT_2022_actualizado_simplificado.feather?raw=True", out="data/ISMT_2022_actualizado_simplificado.feather")
+    return gpd.read_feather(file)
 
 
 def get_coverture_percentage(df, other):
