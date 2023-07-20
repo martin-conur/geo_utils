@@ -9,11 +9,11 @@ class OSM_geometry:
         Street Maps's features
 
         Args:
-            lat: center point latitude.
-            lon: center point longitude.
+            center_point: lat, long tuple.
+            tags: OSM tags (e.g. {"amenity":["cafe", "bar"]})
             radio: distance in meters to cover from the center point.
     """
-    center_point: int
+    center_point: tuple
     tags: dict
     radio: int = field(default=1000)
 
@@ -33,8 +33,10 @@ class OSM_geometry:
         return graph
 
     def get_basic_stats(self):
-        return pd.DataFrame(
-            ox.stats.basic_stats(self.graph)
+        return (
+            pd.DataFrame(
+                ox.stats.basic_stats(self.graph)
+            )
             .drop(
                 columns=[
                     "streets_per_node_proportions",

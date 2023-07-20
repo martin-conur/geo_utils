@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mcu-geo-utils',
-    version='0.1',
+    version='0.2',
     author='Martin Conur',
     author_email='martincontrerasur@gmail.com',
     packages=['mcu_geo_utils'],

@@ -1,7 +1,8 @@
 Metadata-Version: 2.1
 Name: mcu-geo-utils
-Version: 0.1
+Version: 0.2
 Summary: variaty of geo-related tools
+Home-page: https://pypi.org/project/mcu-geo-utils/
 Author: Martin Conur
 Author-email: martincontrerasur@gmail.com
 License: MIT
