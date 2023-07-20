@@ -1,13 +1,13 @@
 from setuptools import setup
 
 setup(
-    name='geo_utils',
+    name='mcu-geo-utils',
     version='0.1',
     author='Martin Conur',
     author_email='martincontrerasur@gmail.com',
-    packages=['geo_utils'],
+    packages=['mcu_geo_utils'],
     scripts=[],
-   # url='http://pypi.python.org/pypi/apiweather/',
+    url='https://pypi.org/project/mcu-geo-utils/',
     license='MIT',
     description='variaty of geo-related tools',
     long_description=open('README.md').read(),
