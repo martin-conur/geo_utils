@@ -3,6 +3,14 @@ import geopandas as gpd
 from shapely.geometry import Point
 import wget
 import os
+import warnings
+
+def fxn():
+    warnings.warn("user", UserWarning)
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    fxn()
 
 # TODO:
 # 1: CHECK IF 18S OR 19S SHOULD APPLY
@@ -10,13 +18,13 @@ import os
 
 def get_census_dataset() -> gpd.GeoDataFrame:
     os.makedirs("data", exist_ok=True)
-    file = wget.download("https://github.com/martin-conur/geo_utils/blob/main/geo_utils/data/info_manzanas_censo2017.feather?raw=True", out="data/info_manzanas_censo2017.feather")
+    file = wget.download("https://github.com/martin-conur/mcu_geo_utils/blob/main/mcu_geo_utils/data/info_manzanas_censo2017.feather?raw=True", out="data/info_manzanas_censo2017.feather")
     return gpd.read_feather(file)
 
 
 def get_ismt_dataset() -> gpd.GeoDataFrame:
     os.makedirs("data", exist_ok=True)
-    file = wget.download("https://github.com/martin-conur/geo_utils/blob/main/geo_utils/data/ISMT_2022_actualizado_simplificado.feather?raw=True", out="data/ISMT_2022_actualizado_simplificado.feather")
+    file = wget.download("https://github.com/martin-conur/mcu_geo_utils/blob/main/mcu_geo_utils/data/ISMT_2022_actualizado_simplificado.feather?raw=True", out="data/ISMT_2022_actualizado_simplificado.feather")
     return gpd.read_feather(file)
 
 
@@ -37,7 +45,7 @@ def get_census_data_from_point(lat: float,
     point = (
         gpd.GeoSeries(Point(lon, lat), crs=4326)
         .to_crs(9155)  # TODO 1
-        .buffer(1000)
+        .buffer(radio)
         .to_crs(4326)
     )
 
@@ -72,7 +80,7 @@ def get_ismt_data_from_point(lat: float,
     point = (
         gpd.GeoSeries(Point(lon, lat), crs=4326)
         .to_crs(9155)  # TODO 1
-        .buffer(1000)
+        .buffer(radio)
         .to_crs(4326)
     )
     # Creating the filtered dataframe
